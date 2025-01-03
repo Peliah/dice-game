@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import RollDice from "./RollDice";
 
 const StartGame = () => {
 
@@ -29,6 +30,7 @@ const StartGame = () => {
                     <p>Select Number</p>
                 </NumberSelectorContainer>
             </div>
+            <RollDice />
         </MainContainer>
     )
 }
@@ -40,7 +42,7 @@ const NumberSelectorContainer = styled.div`
     flex-direction: column;
     align-items: end;
 
-    
+
     .flex {
         display: flex;
         gap: 24px;
