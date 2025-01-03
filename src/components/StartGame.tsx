@@ -8,27 +8,49 @@ const StartGame = () => {
 
 
     return (
-        <main>
-            <ScoreContainer>
-                <h1>0</h1>
-                <p>Total Score</p>
-            </ScoreContainer>
-            <div>
-                {arrNumber.map((value, i) => (
-                    <Box
-                        key={i}
-                        onClick={() => setSelectedNumber(value)}
-                        isSelected={selectedNumber === value}
-                    >
-                        {value}
-                    </Box>
-                ))}
+        <MainContainer>
+            <div className="top_section">
+                <ScoreContainer>
+                    <h1>0</h1>
+                    <p>Total Score</p>
+                </ScoreContainer>
+                <NumberSelectorContainer>
+                    <div className="flex">
+                        {arrNumber.map((value, i) => (
+                            <Box
+                                key={i}
+                                onClick={() => setSelectedNumber(value)}
+                                isSelected={selectedNumber === value}
+                            >
+                                {value}
+                            </Box>
+                        ))}
+                    </div>
+                    <p>Select Number</p>
+                </NumberSelectorContainer>
             </div>
-        </main>
+        </MainContainer>
     )
 }
 
 export default StartGame;
+
+const NumberSelectorContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    
+    .flex {
+        display: flex;
+        gap: 24px;
+
+    }
+    p {
+        font-size: 24px;
+        font-weight: 700px;
+    }
+`;
 
 const ScoreContainer = styled.div`
     max-width: 200px;
@@ -53,4 +75,12 @@ const Box = styled.div`
     font-size: 24px;
     background-color: ${(props) => props.isSelected ? 'black' : 'white'};
     color: ${(props) => props.isSelected ? 'white' : 'black'};
+`;
+
+const MainContainer = styled.main`
+    .top_section {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
 `;
