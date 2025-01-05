@@ -57,7 +57,7 @@ src
 ├── components  
 │   ├── Hero.tsx            # Landing page with "Play Now" button  
 │   ├── RollDice.tsx        # Dice rolling logic and animation  
-│   ├── StartGame.tsx  # Sliding rules panel  
+│   ├── StartGame.tsx       # Where game play happens  
 ├── styles  
 │   ├── Button.ts     # Global CSS styling  
 └── App.tsx                 # Main app component  
