@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { Button } from "../styles/Button";
 
-const Hero = ({ toggle }) => {
+interface HeroProps {
+    toggle: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ toggle }) => {
     return (
         <Container>
             <div className="image-container">

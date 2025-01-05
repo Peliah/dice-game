@@ -1,7 +1,10 @@
-import { useState } from "react";
 import styled from "styled-components";
 
-const RollDice = ({ currentDice, rollDice }) => {
+interface RollDiceProps {
+    currentDice: number;
+    rollDice: () => void;
+}
+const RollDice: React.FC<RollDiceProps> = ({ currentDice, rollDice }) => {
 
     return (
         <DiceContainer>

@@ -3,17 +3,21 @@ import styled from "styled-components";
 import RollDice from "./RollDice";
 import { Button, OutlineButton } from "../styles/Button";
 
+interface BoxProps {
+    isSelected: boolean;
+}
+
 const StartGame = () => {
 
     const arrNumber = [1, 2, 3, 4, 5, 6];
-    const [selectedNumber, setSelectedNumber] = useState();
+    const [selectedNumber, setSelectedNumber] = useState<number | undefined>(undefined);
     const [currentDice, setCurrentDice] = useState(1);
     const [score, setScore] = useState(0);
     const [error, setError] = useState("");
     const [showRules, setShowRules] = useState(false);
 
 
-    const generateRandomNumber = (min, max) => {
+    const generateRandomNumber = (min: number, max: number) => {
         return Math.floor(Math.random() * (max - min) + min);
     }
 
@@ -23,7 +27,7 @@ const StartGame = () => {
             return;
         }
         const randomNumber = generateRandomNumber(1, 7);
-        setCurrentDice((prev) => randomNumber);
+        setCurrentDice(randomNumber);
 
         if (selectedNumber === randomNumber) {
             setScore(prev => prev + randomNumber);
@@ -181,7 +185,7 @@ const NumberSelectorContainer = styled.div`
     }
 `;
 
-const Box = styled.div`
+const Box = styled.div<BoxProps>`
     height: 72px;
     width: 72px;
     border: 1px solid black;
