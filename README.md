@@ -1,50 +1,88 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+# 🎲 Dice Game  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A simple and engaging dice game where players guess the outcome of a dice roll. Earn points for correct guesses and lose points for incorrect ones!  
 
-## Expanding the ESLint configuration
+## 🚀 Features  
+- **Interactive Gameplay**: Guess a number and roll the dice to win points.  
+- **Responsive Design**: Optimized for all screen sizes.  
+- **Sliding Rules Panel**: View game instructions with a smooth sliding animation.  
+- **Dynamic Dice Roll Animation**: Watch the dice spin before revealing the result.  
+- **Score Management**: Reset the score anytime during gameplay.  
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🛠️ Tech Stack  
+- **Frontend**: React, Styled-Components  
+- **Language**: TypeScript  
 
-- Configure the top-level `parserOptions` property like this:
+## 📋 How to Play  
+1. Select a number from the available options.  
+2. Click on the dice to roll it.  
+3. If your selected number matches the dice outcome, you gain points equal to the dice number.  
+4. If the guess is incorrect, 2 points are deducted from your score.  
+5. Reset your score anytime by clicking the "Reset" button.  
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🖥️ Local Setup  
+
+1. Clone the repository:  
+   ```bash  
+   git clone https://github.com/Peliah/dice-game.git  
+   ```  
+
+2. Navigate to the project directory:  
+   ```bash  
+   cd dice-game  
+   ```  
+
+3. Install dependencies:  
+   ```bash  
+   npm install  
+   ```  
+
+4. Start the development server:  
+   ```bash  
+   npm run dev  
+   ```  
+
+5. Open your browser and visit:  
+   ```
+   http://localhost:5173  
+   ```  
+
+## 📂 Project Structure  
+
 ```
+src  
+├── components  
+│   ├── Hero.tsx            # Landing page with "Play Now" button  
+│   ├── RollDice.tsx        # Dice rolling logic and animation  
+│   ├── StartGame.tsx  # Sliding rules panel  
+├── styles  
+│   ├── Button.ts     # Global CSS styling  
+└── App.tsx                 # Main app component  
+```  
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 🎨 Styling  
+The app uses `styled-components` for CSS-in-JS styling, ensuring scoped and reusable styles.  
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🏗️ Planned Improvements  
+- Add multiplayer support for competitive gameplay.  
+- Introduce a leaderboard to track high scores.  
+- Add custom themes and settings for a personalized experience.  
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## 👨‍💻 Contributing  
+
+Contributions are welcome! Follow these steps:  
+1. Fork the repository.  
+2. Create a new branch: `git checkout -b feature-name`.  
+3. Make your changes and commit: `git commit -m "Add new feature"`.  
+4. Push to your forked repository: `git push origin feature-name`.  
+5. Create a pull request.  
+
+## 📜 License  
+This project is licensed under the MIT License.  
+
+---
+
+Happy rolling! 🎉  

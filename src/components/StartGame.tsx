@@ -52,6 +52,9 @@ const StartGame = () => {
         setError("")
     }
 
+    const toggleRules = () => {
+        setShowRules(prev => !prev);
+    };
 
     return (
         <MainContainer>
@@ -79,23 +82,19 @@ const StartGame = () => {
             <RollDice currentDice={currentDice} rollDice={rollDice} />
             <div className="btns">
                 <OutlineButton onClick={() => resetScoreHandler()}>Reset</OutlineButton>
-                <Button onClick={() => setShowRules(prev => !prev)}>{showRules ? "Hide" : "Show"} rules</Button>
+                <Button onClick={toggleRules}>{showRules ? "Hide" : "Show"} rules</Button>
             </div>
-            {
-                showRules ?
-                    <RulesContainer>
-                        <h2>How to play dice Game</h2>
-                        <div className="text">
-                            <p>Select any number</p>
-                            <p>Click on dice image</p>
-                            <p>
-                                After clicking on the dice if selected number is equal to dice number you will get same point as dice {" "}
-                            </p>
-                            <p>if you get a wrong guess, 2 point will be deducted from your total score</p>
-                        </div>
-                    </RulesContainer>
-                    : ''
-            }
+            <RulesContainer show={showRules}>
+                <h2>How to play dice Game</h2>
+                <div className="text">
+                    <p>Select any number</p>
+                    <p>Click on dice image</p>
+                    <p>
+                        After clicking on the dice, if the selected number is equal to the dice number you will get same point as dice {" "}
+                    </p>
+                    <p>if you get a wrong guess, 2 point will be deducted from your total score</p>
+                </div>
+            </RulesContainer>
         </MainContainer>
     )
 }
@@ -210,17 +209,22 @@ const Box = styled.div<BoxProps>`
     }
 `;
 
-const RulesContainer = styled.div`
+const RulesContainer = styled.div<{ show: boolean }>`
     max-width: 800px;
     margin: 0 auto;
     background-color: #fbf1f1;
-    padding: 20px;
+    padding: ${({ show }) => (show ? "20px" : "0 20px")};
     margin-top: 40px;
     border-radius: 10px;
+    max-height: ${({ show }) => (show ? "500px" : "0")};
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
 
     h2 {
         font-size: 24px;
-
+        opacity: ${({ show }) => (show ? "1" : "0")};
+        transition: opacity 0.3s ease-in-out;
+        
         @media (max-width: 768px) {
             font-size: 20px;
         }
@@ -228,6 +232,8 @@ const RulesContainer = styled.div`
 
     .text {
         margin-top: 24px;
+        opacity: ${({ show }) => (show ? "1" : "0")};
+        transition: opacity 0.3s ease-in-out;
 
         p {
             font-size: 18px;
@@ -238,3 +244,4 @@ const RulesContainer = styled.div`
         }
     }
 `;
+
