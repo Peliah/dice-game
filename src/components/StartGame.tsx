@@ -98,26 +98,30 @@ const StartGame = () => {
 
 export default StartGame;
 
-const NumberSelectorContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-
-
-    .flex {
+const MainContainer = styled.main`
+    .top_section {
         display: flex;
-        gap: 24px;
+        justify-content: space-around;
+        align-items: center;
 
-    }
-    p {
-        font-size: 24px;
-        font-weight: 700px;
-        padding-bottom: 4px;
-        padding-top: 4px;
+        @media (max-width: 768px) {
+            flex-direction: column;
+            gap: 20px;
+        }
     }
 
-    .error{
-        color: red;
+    .btns {
+        margin-top: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        @media (max-width: 768px) {
+            margin-top: 1.5rem;
+            gap: 8px;
+        }
     }
 `;
 
@@ -125,13 +129,55 @@ const ScoreContainer = styled.div`
     max-width: 200px;
     text-align: center;
 
-    h1{
+    h1 {
         font-size: 100px;
-        line-height: 100px
+        line-height: 100px;
+
+        @media (max-width: 768px) {
+            font-size: 40px;
+            line-height: 60px;
+        }
     }
-    p{
+
+    p {
         font-size: 24px;
         font-weight: 500px;
+
+        @media (max-width: 768px) {
+            font-size: 16px;
+        }
+    }
+`;
+
+const NumberSelectorContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    .flex {
+        display: flex;
+        gap: 24px;
+
+        @media (max-width: 768px) {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+    }
+
+    p {
+        font-size: 24px;
+        font-weight: 700;
+        padding-bottom: 4px;
+        padding-top: 4px;
+
+        @media (max-width: 768px) {
+            font-size: 18px;
+        }
+    }
+
+    .error {
+        color: red;
     }
 `;
 
@@ -142,32 +188,21 @@ const Box = styled.div`
     display: grid;
     place-items: center;
     font-size: 24px;
-    background-color: ${(props) => props.isSelected ? 'black' : 'white'};
-    color: ${(props) => props.isSelected ? 'white' : 'black'};
+    background-color: ${(props) => (props.isSelected ? 'black' : 'white')};
+    color: ${(props) => (props.isSelected ? 'white' : 'black')};
     cursor: pointer;
 
-    &:hover{
+    &:hover {
         background-color: black;
         border: 1px solid transparent;
         color: white;
         transition: 0.3s background ease-in;
     }
-`;
 
-const MainContainer = styled.main`
-    .top_section {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-    }
-    .btns{
-        margin-top: 2.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-
+    @media (max-width: 768px) {
+        height: 40px;
+        width: 40px;
+        font-size: 20px;
     }
 `;
 
@@ -178,10 +213,24 @@ const RulesContainer = styled.div`
     padding: 20px;
     margin-top: 40px;
     border-radius: 10px;
-    h2{
+
+    h2 {
         font-size: 24px;
+
+        @media (max-width: 768px) {
+            font-size: 20px;
+        }
     }
-    .text{
+
+    .text {
         margin-top: 24px;
+
+        p {
+            font-size: 18px;
+
+            @media (max-width: 768px) {
+                font-size: 16px;
+            }
+        }
     }
 `;
