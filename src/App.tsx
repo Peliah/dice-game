@@ -27,8 +27,11 @@ function App() {
       {isGameStarted ? <StartGame gameLevel={gameLevel} /> : <Hero toggle={toggleGamePlay} />}
 
       {isLevelModalOpen && (
-        <ModalOverlay>
+        <ModalOverlay onClick={() => setIsLevelModalOpen(false)}>
           <ModalContent>
+            <div className="top-close" onClick={() => setIsLevelModalOpen(false)}>
+              <div className="close">x</div>
+            </div>
             <h2>Select Game Level</h2>
             <LevelList>
               {GAME_LEVELS.map((level) => (
@@ -74,6 +77,20 @@ export const ModalContent = styled.div`
     margin-bottom: 16px;
     font-size: 24px;
     color: #333;
+  }
+  .top-close{
+    /* text-align: end; */
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    color: red;
+    cursor: pointer;
+  }
+  .close{
+    border: 1px solid red;
+    padding: 0px 8px 0px 8px;
+    width: fit-content;
+    border-radius: 100%;
   }
 `;
 
