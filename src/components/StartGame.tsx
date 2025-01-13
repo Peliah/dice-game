@@ -111,7 +111,7 @@ const StartGame = ({ gameLevel }: { gameLevel: string }) => {
                     <ul>
                         <li>Guess a number from 1 - 6</li>
                         <li>Roll the dice by clicking the dice image</li>
-                        <p>After rolling the dice; </p>
+                        <p><b>After rolling the dice; </b></p>
                         <li>if the number of the dice is same and your guessed number, you will get same point as the dice</li>
                         <li>if you get a wrong guess, 2 point will be deducted from your total score</li>
                     </ul>
@@ -252,6 +252,7 @@ const RulesContainer = styled.div<{ show: boolean }>`
         }
     }
 
+
     .text {
         margin-top: 24px;
         opacity: ${({ show }) => (show ? "1" : "0")};
@@ -259,6 +260,7 @@ const RulesContainer = styled.div<{ show: boolean }>`
 
         p {
             font-size: 18px;
+            margin-top: 10px;
 
             @media (max-width: 768px) {
                 font-size: 16px;

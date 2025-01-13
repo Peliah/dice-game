@@ -21,10 +21,11 @@ function App() {
 
   const closeModal = () => {
     setIsClosing(true);
+    // animate close
     setTimeout(() => {
       setIsLevelModalOpen(false);
       setIsClosing(false);
-    }, 300); // Match animation duration
+    }, 300);
   };
 
   const selectGameLevel = (level: string) => {
@@ -41,7 +42,6 @@ function App() {
         <Hero toggle={toggleGamePlay} />
       )}
 
-      {/* Modal */}
       {isLevelModalOpen && (
         <ModalOverlay onClick={closeModal}>
           <ModalContent isClosing={isClosing} onClick={(e) => e.stopPropagation()}>
