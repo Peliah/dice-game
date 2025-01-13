@@ -29,21 +29,22 @@ const StartGame = ({ gameLevel }: { gameLevel: string }) => {
 
         // Adjust randomness based on game level
         let randomNumber: number;
-
+        // setup the game level
+        // starting with level easy
         if (gameLevel === "Easy") {
             // 1 in 4 attempts is perfectly random, otherwise, favor the selected number
-            const isRandom = Math.random() < 0.25; // 25% chance for randomness
-            randomNumber = isRandom
-                ? generateRandomNumber(1, 7)
-                : selectedNumber;
-        } else if (gameLevel === "Medium") {
+            // 25% chance for randomness
+            const isRandom = Math.random() < 0.25;
+            randomNumber = isRandom ? generateRandomNumber(1, 7) : selectedNumber;
+        }
+        // Medium Level gameplay
+        else if (gameLevel === "Medium") {
             // 2 in 4 attempts (50%) is perfectly random
-            const isRandom = Math.random() < 0.5; // 50% chance for randomness
-            randomNumber = isRandom
-                ? generateRandomNumber(1, 7)
-                : selectedNumber;
+            // 50% chance for randomness
+            const isRandom = Math.random() < 0.5;
+            randomNumber = isRandom ? generateRandomNumber(1, 7) : selectedNumber;
         } else {
-            // Hard level: 100% random
+            // Hard level
             randomNumber = generateRandomNumber(1, 7);
         }
 

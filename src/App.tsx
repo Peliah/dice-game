@@ -1,35 +1,51 @@
-import styled from "styled-components";
-import { useState } from "react"
-import Hero from "./components/Hero"
+import styled, { keyframes } from "styled-components";
+import { useState } from "react";
+import Hero from "./components/Hero";
 import StartGame from "./components/StartGame";
 import { OutlineButton } from "./styles/Button";
 
-
+interface ModalContentProps {
+  isClosing: boolean;
+}
 function App() {
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [gameLevel, setGameLevel] = useState("");
   const [isLevelModalOpen, setIsLevelModalOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
   const GAME_LEVELS = ["Easy", "Medium", "Hard"];
 
   const toggleGamePlay = () => {
     setIsLevelModalOpen(true);
-  }
+  };
+
+  const closeModal = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsLevelModalOpen(false);
+      setIsClosing(false);
+    }, 300); // Match animation duration
+  };
 
   const selectGameLevel = (level: string) => {
     setGameLevel(level);
-    setIsLevelModalOpen(false);
-    setIsGameStarted((prev) => !prev);
-  }
+    closeModal();
+    setTimeout(() => setIsGameStarted(true), 300);
+  };
 
   return (
     <>
-      {isGameStarted ? <StartGame gameLevel={gameLevel} /> : <Hero toggle={toggleGamePlay} />}
+      {isGameStarted ? (
+        <StartGame gameLevel={gameLevel} />
+      ) : (
+        <Hero toggle={toggleGamePlay} />
+      )}
 
+      {/* Modal */}
       {isLevelModalOpen && (
-        <ModalOverlay onClick={() => setIsLevelModalOpen(false)}>
-          <ModalContent>
-            <div className="top-close" onClick={() => setIsLevelModalOpen(false)}>
+        <ModalOverlay onClick={closeModal}>
+          <ModalContent isClosing={isClosing} onClick={(e) => e.stopPropagation()}>
+            <div className="top-close" onClick={closeModal}>
               <div className="close">x</div>
             </div>
             <h2>Select Game Level</h2>
@@ -46,10 +62,33 @@ function App() {
         </ModalOverlay>
       )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
+
+const slideIn = keyframes`
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+const slideOut = keyframes`
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+`;
 
 
 export const ModalOverlay = styled.div`
@@ -65,13 +104,15 @@ export const ModalOverlay = styled.div`
   z-index: 1000;
 `;
 
-export const ModalContent = styled.div`
+export const ModalContent = styled.div<ModalContentProps>`
   background: white;
   padding: 24px;
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 300px;
+  animation: ${(props) => (props.isClosing ? slideOut : slideIn)} 0.3s ease-out;
+
 
   h2 {
     margin-bottom: 16px;
@@ -117,4 +158,3 @@ export const LevelButton = styled.button`
     background: #3a96b2;
   }
 `;
-
