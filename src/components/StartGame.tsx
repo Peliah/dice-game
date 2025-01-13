@@ -7,7 +7,7 @@ interface BoxProps {
     isSelected: boolean;
 }
 
-const StartGame = () => {
+const StartGame = ({ gameLevel }: { gameLevel: string }) => {
 
     const arrNumber = [1, 2, 3, 4, 5, 6];
     const [selectedNumber, setSelectedNumber] = useState<number | undefined>(undefined);
@@ -26,19 +26,38 @@ const StartGame = () => {
             setError("You have not selected a number");
             return;
         }
-        const randomNumber = generateRandomNumber(1, 7);
+
+        // Adjust randomness based on game level
+        let randomNumber: number;
+
+        if (gameLevel === "Easy") {
+            // 1 in 4 attempts is perfectly random, otherwise, favor the selected number
+            const isRandom = Math.random() < 0.25; // 25% chance for randomness
+            randomNumber = isRandom
+                ? generateRandomNumber(1, 7)
+                : selectedNumber;
+        } else if (gameLevel === "Medium") {
+            // 2 in 4 attempts (50%) is perfectly random
+            const isRandom = Math.random() < 0.5; // 50% chance for randomness
+            randomNumber = isRandom
+                ? generateRandomNumber(1, 7)
+                : selectedNumber;
+        } else {
+            // Hard level: 100% random
+            randomNumber = generateRandomNumber(1, 7);
+        }
+
         setCurrentDice(randomNumber);
 
         if (selectedNumber === randomNumber) {
-            setScore(prev => prev + randomNumber);
+            setScore((prev) => prev + randomNumber);
         } else {
-            setScore(prev => prev - 2);
+            setScore((prev) => prev - 2);
         }
 
-        setSelectedNumber(undefined)
-
-
+        setSelectedNumber(undefined);
     };
+
 
     const numberSelectorHandler = (value: number) => {
         setSelectedNumber(value);
@@ -65,6 +84,7 @@ const StartGame = () => {
                 </ScoreContainer>
                 <NumberSelectorContainer>
                     <p className="error">{error}</p>
+                    <p>Level: {gameLevel}</p>
                     <div className="flex">
                         {arrNumber.map((value, i) => (
                             <Box
@@ -76,7 +96,7 @@ const StartGame = () => {
                             </Box>
                         ))}
                     </div>
-                    <p>Select Number</p>
+                    <p>Pick a number</p>
                 </NumberSelectorContainer>
             </div>
             <RollDice currentDice={currentDice} rollDice={rollDice} />
@@ -87,12 +107,13 @@ const StartGame = () => {
             <RulesContainer show={showRules}>
                 <h2>How to play dice Game</h2>
                 <div className="text">
-                    <p>Select any number</p>
-                    <p>Click on dice image</p>
-                    <p>
-                        After clicking on the dice, if the selected number is equal to the dice number you will get same point as dice {" "}
-                    </p>
-                    <p>if you get a wrong guess, 2 point will be deducted from your total score</p>
+                    <ul>
+                        <li>Guess a number from 1 - 6</li>
+                        <li>Roll the dice by clicking the dice image</li>
+                        <p>After rolling the dice; </p>
+                        <li>if the number of the dice is same and your guessed number, you will get same point as the dice</li>
+                        <li>if you get a wrong guess, 2 point will be deducted from your total score</li>
+                    </ul>
                 </div>
             </RulesContainer>
         </MainContainer>
